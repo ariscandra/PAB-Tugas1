@@ -1,6 +1,7 @@
 # PAB-Tugas1
 
-Tugas Pertemuan 4 — State Management dengan Provider. Aplikasi keranjang belanja mini (shopping cart) pakai Flutter + Provider.
+Tugas Pertemuan 4
+State Management dengan Provider. Aplikasi keranjang belanja mini (shopping cart) pakai Flutter + Provider.
 
 ## Isi
 
@@ -9,7 +10,7 @@ Tugas Pertemuan 4 — State Management dengan Provider. Aplikasi keranjang belan
 - Counter dengan Provider (Part 4)
 - **Keranjang belanja** — daftar produk, tambah ke keranjang, ubah jumlah, checkout (Part 5)
 
-## Jalanin
+## Cara ngerun
 
 ```bash
 flutter pub get
