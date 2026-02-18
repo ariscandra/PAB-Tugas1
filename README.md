@@ -10,13 +10,6 @@ State Management dengan Provider. Aplikasi keranjang belanja mini (shopping cart
 - Counter dengan Provider (Part 4)
 - **Keranjang belanja** — daftar produk, tambah ke keranjang, ubah jumlah, checkout (Part 5)
 
-## Cara ngerun
-
-```bash
-flutter pub get
-flutter run
-```
-
 ## Stack
 
-Flutter, Provider, tema custom (Slate Blue × Terracotta).
+Flutter, Provider, tema custom sendiri (Slate Blue × Terracotta).
