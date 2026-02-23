@@ -136,5 +136,6 @@ lib/
 ---
 
 <p align="center">
-  <sub>PAB-Tugas1 · Tugas PAB (Pemrograman Aplikasi Bergerak) — Pertemuan 4</sub>
+  <sub>PAB-Tugas1 · Tugas PAB (Pemrograman Aplikasi Bergerak) — Pertemuan 4</sub><br />
+  <sub><b>Aris Candra Muzaffar</b> · 2409116088</sub>
 </p>
