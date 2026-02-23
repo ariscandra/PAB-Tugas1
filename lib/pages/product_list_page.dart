@@ -6,56 +6,101 @@ import '../models/product.dart';
 import '../models/cart_model.dart';
 import 'cart_page.dart';
 
-class ProductListPage extends StatelessWidget {
+final List<Product> _allProducts = [
+  Product(
+    id: '1',
+    name: 'Laptop Gaming',
+    price: 15000000,
+    emoji: '💻',
+    description: 'Laptop gaming performa tinggi',
+    category: 'Elektronik',
+    imagePath: 'assets/images/laptop.jpg',
+  ),
+  Product(
+    id: '2',
+    name: 'Smartphone Pro',
+    price: 8000000,
+    emoji: '📱',
+    description: 'Smartphone flagship terbaru',
+    category: 'Gadget',
+    imagePath: 'assets/images/smartphone.jpg',
+  ),
+  Product(
+    id: '3',
+    name: 'Wireless Headphones',
+    price: 1500000,
+    emoji: '🎧',
+    description: 'Headphones noise-cancelling',
+    category: 'Aksesoris',
+    imagePath: 'assets/images/headphones.jpg',
+  ),
+  Product(
+    id: '4',
+    name: 'Smart Watch',
+    price: 3000000,
+    emoji: '⌚',
+    description: 'Smartwatch dengan health tracking',
+    category: 'Gadget',
+    imagePath: 'assets/images/smartwatch.jpg',
+  ),
+  Product(
+    id: '5',
+    name: 'Camera DSLR',
+    price: 12000000,
+    emoji: '📷',
+    description: 'Kamera DSLR profesional',
+    category: 'Elektronik',
+    imagePath: 'assets/images/camera.jpg',
+  ),
+  Product(
+    id: '6',
+    name: 'Tablet Pro',
+    price: 7000000,
+    emoji: '📟',
+    description: 'Tablet untuk produktivitas',
+    category: 'Elektronik',
+    imagePath: 'assets/images/tablet.jpg',
+  ),
+];
+
+const String _categoryAll = 'Semua';
+
+class ProductListPage extends StatefulWidget {
   const ProductListPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final products = [
-      Product(
-        id: '1',
-        name: 'Laptop Gaming',
-        price: 15000000,
-        emoji: '💻',
-        description: 'Laptop gaming performa tinggi',
-      ),
-      Product(
-        id: '2',
-        name: 'Smartphone Pro',
-        price: 8000000,
-        emoji: '📱',
-        description: 'Smartphone flagship terbaru',
-      ),
-      Product(
-        id: '3',
-        name: 'Wireless Headphones',
-        price: 1500000,
-        emoji: '🎧',
-        description: 'Headphones noise-cancelling',
-      ),
-      Product(
-        id: '4',
-        name: 'Smart Watch',
-        price: 3000000,
-        emoji: '⌚',
-        description: 'Smartwatch dengan health tracking',
-      ),
-      Product(
-        id: '5',
-        name: 'Camera DSLR',
-        price: 12000000,
-        emoji: '📷',
-        description: 'Kamera DSLR profesional',
-      ),
-      Product(
-        id: '6',
-        name: 'Tablet Pro',
-        price: 7000000,
-        emoji: '📟',
-        description: 'Tablet untuk produktivitas',
-      ),
-    ];
+  State<ProductListPage> createState() => _ProductListPageState();
+}
 
+class _ProductListPageState extends State<ProductListPage> {
+  final TextEditingController _searchController = TextEditingController();
+  String _selectedCategory = _categoryAll;
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Product> get _filteredProducts {
+    var list = _allProducts;
+    final query = _searchController.text.trim().toLowerCase();
+    if (query.isNotEmpty) {
+      list = list.where((p) => p.name.toLowerCase().contains(query)).toList();
+    }
+    if (_selectedCategory != _categoryAll) {
+      list = list.where((p) => p.category == _selectedCategory).toList();
+    }
+    return list;
+  }
+
+  static List<String> get _categories {
+    final cats = _allProducts.map((p) => p.category).toSet().toList()..sort();
+    return [_categoryAll, ...cats];
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Produk'),
@@ -105,18 +150,94 @@ class ProductListPage extends StatelessWidget {
           const SizedBox(width: 8),
         ],
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.08,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return Card(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+            child: TextField(
+              controller: _searchController,
+              onChanged: (_) => setState(() {}),
+              decoration: InputDecoration(
+                hintText: 'Cari produk...',
+                hintStyle: GoogleFonts.inter(color: AppColors.textSecondary),
+                prefixIcon: const Icon(Icons.search, color: AppColors.textSecondary),
+                filled: true,
+                fillColor: AppColors.surface,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 16),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              clipBehavior: Clip.none,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: _categories.map((cat) {
+                  final isSelected = _selectedCategory == cat;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => setState(() => _selectedCategory = cat),
+                        borderRadius: BorderRadius.circular(20),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                          decoration: BoxDecoration(
+                            color: isSelected ? AppColors.primaryLight : AppColors.surface,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isSelected ? AppColors.primary.withOpacity(0.4) : AppColors.divider,
+                              width: isSelected ? 1.5 : 1,
+                            ),
+                            boxShadow: const [],
+                          ),
+                          child: Text(
+                            cat,
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                              color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+          Expanded(
+            child: _filteredProducts.isEmpty
+                ? Center(
+                    child: Text(
+                      'Tidak ada produk',
+                      style: GoogleFonts.inter(
+                        color: AppColors.textSecondary,
+                        fontSize: 14,
+                      ),
+                    ),
+                  )
+                : GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.08,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemCount: _filteredProducts.length,
+                    itemBuilder: (context, index) {
+                final product = _filteredProducts[index];
+                return Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -136,20 +257,36 @@ class ProductListPage extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.productCardBg,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
-                        ),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
                       ),
-                      child: Center(
-                        child: Text(
-                          product.emoji,
-                          style: const TextStyle(fontSize: 36),
-                        ),
-                      ),
+                      child: product.imagePath != null
+                          ? Image.asset(
+                              product.imagePath!,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              errorBuilder: (_, __, ___) => Container(
+                                color: AppColors.productCardBg,
+                                child: Center(
+                                  child: Text(
+                                    product.emoji,
+                                    style: const TextStyle(fontSize: 36),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              color: AppColors.productCardBg,
+                              child: Center(
+                                child: Text(
+                                  product.emoji,
+                                  style: const TextStyle(fontSize: 36),
+                                ),
+                              ),
+                            ),
                     ),
                   ),
                   Padding(
@@ -206,6 +343,9 @@ class ProductListPage extends StatelessWidget {
             ),
           );
         },
+      ),
+    ),
+        ],
       ),
     );
   }

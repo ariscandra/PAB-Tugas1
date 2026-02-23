@@ -19,3 +19,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/laptop.jpg
+    - assets/images/smartphone.jpg
+    - assets/images/headphones.jpg
+    - assets/images/smartwatch.jpg
+    - assets/images/camera.jpg
+    - assets/images/tablet.jpg

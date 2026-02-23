@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 import '../models/cart_model.dart';
+import 'checkout_page.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -127,18 +128,34 @@ class CartPage extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Row(
                           children: [
-                            Container(
-                              width: 72,
-                              height: 72,
-                              decoration: BoxDecoration(
-                                color: AppColors.productCardBg,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  product.emoji,
-                                  style: const TextStyle(fontSize: 36),
-                                ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: SizedBox(
+                                width: 72,
+                                height: 72,
+                                child: product.imagePath != null
+                                    ? Image.asset(
+                                        product.imagePath!,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (_, __, ___) => Container(
+                                          color: AppColors.productCardBg,
+                                          child: Center(
+                                            child: Text(
+                                              product.emoji,
+                                              style: const TextStyle(fontSize: 28),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Container(
+                                        color: AppColors.productCardBg,
+                                        child: Center(
+                                          child: Text(
+                                            product.emoji,
+                                            style: const TextStyle(fontSize: 28),
+                                          ),
+                                        ),
+                                      ),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -304,45 +321,10 @@ class CartPage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text(
-                                'Checkout',
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              content: Text(
-                                'Total: Rp ${cart.totalPrice.toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}\nItem: ${cart.totalQuantity}',
-                                style: GoogleFonts.inter(),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(ctx),
-                                  child: Text(
-                                    'Batal',
-                                    style: GoogleFonts.inter(
-                                      color: AppColors.textSecondary,
-                                    ),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    cart.clear();
-                                    Navigator.pop(ctx);
-                                    Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: const Text('Pesanan berhasil!'),
-                                        duration: const Duration(seconds: 2),
-                                        behavior: SnackBarBehavior.floating,
-                                      ),
-                                    );
-                                  },
-                                  child: const Text('Konfirmasi'),
-                                ),
-                              ],
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CheckoutPage(),
                             ),
                           );
                         },
