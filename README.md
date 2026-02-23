@@ -16,15 +16,15 @@
 
 ---
 
-## Daftar Isi
+## 📚 Daftar Isi
 
-- [Daftar Isi](#daftar-isi)
-- [Deskripsi](#deskripsi)
-- [Fitur](#fitur)
-- [Konten](#konten)
-- [Stack](#stack)
-- [Struktur Proyek](#struktur-proyek)
-- [Cara Menjalankan](#cara-menjalankan)
+- [📚 Daftar Isi](#-daftar-isi)
+- [📄 Deskripsi](#-deskripsi)
+- [✨ Fitur](#-fitur)
+- [📌 Konten](#-konten)
+- [🛠 Stack](#-stack)
+- [📁 Struktur Proyek](#-struktur-proyek)
+- [🚀 Cara Menjalankan](#-cara-menjalankan)
 - [📸 Tampilan Setiap Section](#-tampilan-setiap-section)
   - [Halaman Produk (Laman Utama)](#halaman-produk-laman-utama)
   - [Pencarian Produk](#pencarian-produk)
@@ -35,7 +35,7 @@
 
 ---
 
-## Deskripsi
+## 📄 Deskripsi
 
 **Keranjang Belanja** adalah aplikasi mobile untuk tugas mata kuliah Pemrograman Aplikasi Bergerak (PAB) Pertemuan 4. Projek ini mempraktikkan state management dengan Provider: daftar produk dengan gambar, pencarian, filter kategori, keranjang belanja (tambah, ubah jumlah, hapus), serta halaman checkout dengan ringkasan pesanan dan form data pengiriman.
 
@@ -43,7 +43,7 @@ Tema custom (Slate Blue × Terracotta) dan aset gambar produk disimpan di `asset
 
 ---
 
-## Fitur
+## ✨ Fitur
 
 | Fitur | Keterangan |
 |-------|------------|
@@ -55,7 +55,7 @@ Tema custom (Slate Blue × Terracotta) dan aset gambar produk disimpan di `asset
 
 ---
 
-## Konten
+## 📌 Konten
 
 <p>
   <img src="https://img.shields.io/badge/Part_1-Counter_setState-22c55e?style=flat-square" alt="Part 1" />
@@ -83,7 +83,7 @@ Tema custom (Slate Blue × Terracotta) dan aset gambar produk disimpan di `asset
 
 ---
 
-## Stack
+## 🛠 Stack
 
 <p>
   <img src="https://img.shields.io/badge/Flutter-SDK-64748b?style=flat-square" alt="Flutter" />
@@ -100,7 +100,7 @@ Tema custom (Slate Blue × Terracotta) dan aset gambar produk disimpan di `asset
 
 ---
 
-## Struktur Proyek
+## 📁 Struktur Proyek
 
 <details>
 <summary><b>Lihat struktur folder</b></summary>
@@ -134,7 +134,7 @@ lib/
 
 ---
 
-## Cara Menjalankan
+## 🚀 Cara Menjalankan
 
 <details>
 <summary><b>Prasyarat</b></summary>
@@ -166,7 +166,9 @@ lib/
 
 ## 📸 Tampilan Setiap Section
 
-### Halaman Produk (Laman Utama)
+<a name="halaman-produk-laman-utama"></a>
+<details>
+<summary><b>Halaman Produk (Laman Utama)</b></summary>
 
 <div align="center">
   <img src="documentation/HALAMAN PRODUK.png" alt="Halaman Produk: grid produk dengan gambar, search bar, filter kategori" width="700px">
@@ -174,9 +176,11 @@ lib/
 
 <p align="justify">Laman utama aplikasi. Menampilkan grid daftar produk dengan gambar (dari <code>assets/images/</code>), nama, harga, dan tombol tambah ke keranjang. Di atas terdapat search bar untuk filter berdasarkan nama serta chip filter kategori (Semua, Elektronik, Gadget, Aksesoris). AppBar berisi judul "Produk" dan ikon keranjang (dengan badge jumlah item bila ada).</p>
 
----
+</details>
 
-### Pencarian Produk
+<a name="pencarian-produk"></a>
+<details>
+<summary><b>Pencarian Produk</b></summary>
 
 <div align="center">
   <img src="documentation/PENCARIAN PRODUK.png" alt="Hasil pencarian produk berdasarkan nama" width="700px">
@@ -184,9 +188,11 @@ lib/
 
 <p align="justify">Contoh tampilan setelah pengguna mengetik kata kunci di search bar (misalnya "laptop" atau "smart"). Daftar produk terfilter real-time sesuai nama; jika tidak ada hasil, ditampilkan teks "Tidak ada produk".</p>
 
----
+</details>
 
-### Filter Kategori
+<a name="filter-kategori"></a>
+<details>
+<summary><b>Filter Kategori</b></summary>
 
 <div align="center">
   <img src="documentation/FILTER KATEGORI.png" alt="Filter produk berdasarkan kategori" width="700px">
@@ -194,9 +200,11 @@ lib/
 
 <p align="justify">Salah satu kategori dipilih (misalnya Gadget atau Elektronik). Hanya produk dalam kategori tersebut yang ditampilkan. Filter bisa dikombinasikan dengan pencarian.</p>
 
----
+</details>
 
-### Halaman Keranjang
+<a name="halaman-keranjang"></a>
+<details>
+<summary><b>Halaman Keranjang</b></summary>
 
 <div align="center">
   <img src="documentation/KERANJANG.png" alt="Halaman keranjang berisi item dengan kontrol quantity dan total" width="700px">
@@ -204,9 +212,11 @@ lib/
 
 <p align="justify">Halaman keranjang belanja. Setiap item menampilkan gambar produk, nama, harga satuan, kontrol quantity (+/-), subtotal, dan tombol hapus. Di AppBar terdapat tombol hapus semua (ikon tempat sampah). Bagian bawah menampilkan total harga dan tombol Checkout.</p>
 
----
+</details>
 
-### Keranjang Kosong
+<a name="keranjang-kosong"></a>
+<details>
+<summary><b>Keranjang Kosong</b></summary>
 
 <div align="center">
   <img src="documentation/KERANJANG KOSONG.png" alt="State keranjang kosong" width="700px">
@@ -214,15 +224,19 @@ lib/
 
 <p align="justify">Tampilan saat keranjang belum berisi item. Menampilkan ikon keranjang, teks "Keranjang Anda kosong", dan tombol "Lanjut Belanja" untuk kembali ke halaman produk.</p>
 
----
+</details>
 
-### Halaman Checkout
+<a name="halaman-checkout"></a>
+<details>
+<summary><b>Halaman Checkout</b></summary>
 
 <div align="center">
   <img src="documentation/CHECKOUT.png" alt="Halaman checkout: ringkasan pesanan dan form data pengiriman" width="700px">
 </div>
 
 <p align="justify">Halaman checkout berisi dua bagian: (1) <strong>Ringkasan pesanan</strong> — daftar item dengan gambar produk, quantity, harga satuan, dan subtotal, serta total harga; (2) <strong>Form data pengiriman</strong> — nama penerima, alamat, no. HP (wajib), dan catatan (opsional). Tombol "Kirim pesanan" memvalidasi form lalu mengosongkan keranjang dan kembali ke halaman produk.</p>
+
+</details>
 
 ---
 
